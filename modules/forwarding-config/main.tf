@@ -15,6 +15,9 @@ resource "google_dns_managed_zone" "public" {
     target_name_servers {
       ipv4_address = var.nameserver_02
     }
+    target_name_servers {
+      ipv4_address = var.nameserver_03
+    }
   }
 }
 
@@ -46,6 +49,9 @@ resource "google_dns_managed_zone" "private" {
     }
     target_name_servers {
       ipv4_address = var.nameserver_02
+    }
+    target_name_servers {
+      ipv4_address = var.nameserver_03
     }
   }
 }

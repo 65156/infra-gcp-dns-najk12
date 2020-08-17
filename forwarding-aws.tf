@@ -23,8 +23,9 @@ module "aws_dev" {
   project = "${local.dev_network_project}" 
 
   # forwarding nameservers
-  nameserver_01 = "" #ip address of the nameserver to forward requests to
-  nameserver_02 = ""
+  nameserver_01 = "10.128.2.232"
+  nameserver_02 = "10.128.5.51"
+  nameserver_03 = "10.128.8.30"
 
   # networks
   private_network = "projects/${local.dev_network_project}/global/networks/${local.dev_network_private}" # in format "projects/{project}/global/networks/{network}"
@@ -40,8 +41,9 @@ module "aws_stage" {
   project = "${local.stage_network_project}" 
 
   # forwarding nameservers
-  nameserver_01 = "" #ip address of the nameserver to forward requests to
-  nameserver_02 = ""
+  nameserver_01 = "10.136.9.37" 
+  nameserver_02 = "10.136.0.16"
+  nameserver_03 = "10.136.4.52"
 
   # networks
   private_network = "projects/${local.stage_network_project}/global/networks/${local.stage_network_private}" # in format "projects/{project}/global/networks/{network}"
@@ -57,8 +59,9 @@ module "aws_prod" {
   project = "${local.prod_network_project}" 
 
   # forwarding nameservers
-  nameserver_01 = "" #ip address of the nameserver to forward requests to
-  nameserver_02 = ""
+  nameserver_01 = "10.144.3.2" 
+  nameserver_02 = "10.144.6.134"
+  nameserver_03 = "10.144.8.54"
 
   # networks
   private_network = "projects/${local.prod_network_project}/global/networks/${local.prod_network_private}" # in format "projects/{project}/global/networks/{network}"
