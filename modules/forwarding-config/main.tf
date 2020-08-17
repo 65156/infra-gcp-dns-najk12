@@ -42,10 +42,10 @@ resource "google_dns_managed_zone" "private" {
 
   forwarding_config {
     target_name_servers {
-      ipv4_address = var.aws_nameserver_01
+      ipv4_address = var.nameserver_01
     }
     target_name_servers {
-      ipv4_address = var.aws_nameserver_02
+      ipv4_address = var.nameserver_02
     }
   }
 }
