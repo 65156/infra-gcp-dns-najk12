@@ -1,24 +1,22 @@
 locals {
 
-dev_network_project = 
-dev_network_private =
-dev_network_public =
+dev_network_project = "barbados-dev-583929"
+dev_vpc = "development-vpc "
 
-stage_network_project = 
-stage_network_private =
-stage_network_public =
+stage_network_project = "barbados-stage-583929"
+stage_vpc = "staging-vpc"
 
-prod_network_project = 
-prod_network_private =
-prod_network_public =
+prod_network_project = "barbados-prod-583929"
+prod_vpc = "production-vpc"
 
 }
 
 module "aws_dev" {
   source             = ".//modules/forwarding-config"
 
-  dns_zone_name = "aws-dev-kumo" # name of the zone
-  dns_zone = "dev.aws.ofx.com." # zone address in format "foo.bar."
+  environment = "dev"
+  dns_zone_name = "aws-dev-kumo-private" # name of the zone
+  dns_zone = "private.dev.aws.ofx.com." # zone address in format "foo.bar."
   dns_description = "AWS Development DNS Zone "
   project = "${local.dev_network_project}" 
 
@@ -28,15 +26,15 @@ module "aws_dev" {
   nameserver_03 = "10.128.8.30"
 
   # networks
-  private_network = "projects/${local.dev_network_project}/global/networks/${local.dev_network_private}" # in format "projects/{project}/global/networks/{network}"
-  public_network = "projects/${local.dev_network_project}/global/networks/${local.dev_network_public}"
+  network = "https://www.googleapis.com/compute/v1/projects/${local.dev_network_project}/global/networks/${local.dev_vpc}" # in format "projects/{project}/global/networks/{network}"
 }
 
 module "aws_stage" {
   source             = ".//modules/forwarding-config"
 
-  dns_zone_name = "aws-stage-kumo" # name of the zone
-  dns_zone = "stg.aws.ofx.com." # zone address in format "foo.bar."
+  environment = "stage"
+  dns_zone_name = "aws-stage-kumo-private" # name of the zone
+  dns_zone = "private.stg.aws.ofx.com." # zone address in format "foo.bar."
   dns_description = "AWS Staging DNS Zone "
   project = "${local.stage_network_project}" 
 
@@ -46,15 +44,15 @@ module "aws_stage" {
   nameserver_03 = "10.136.4.52"
 
   # networks
-  private_network = "projects/${local.stage_network_project}/global/networks/${local.stage_network_private}" # in format "projects/{project}/global/networks/{network}"
-  public_network = "projects/${local.stage_network_project}/global/networks/${local.stage_network_public}"
+  network = "https://www.googleapis.com/compute/v1/projects/${local.stage_network_project}/global/networks/${local.stage_vpc}" # in format "projects/{project}/global/networks/{network}"
 }
 
 module "aws_prod" {
   source             = ".//modules/forwarding-config"
 
-  dns_zone_name = "aws-prod-kumo" # name of the zone
-  dns_zone = "prd.aws.ofx.com." # zone address in format "foo.bar."
+  environment = "prod"
+  dns_zone_name = "aws-prod-kumo-private" # name of the zone
+  dns_zone = "private.prd.aws.ofx.com." # zone address in format "foo.bar."
   dns_description = "AWS Production DNS Zone "
   project = "${local.prod_network_project}" 
 
@@ -64,6 +62,6 @@ module "aws_prod" {
   nameserver_03 = "10.144.8.54"
 
   # networks
-  private_network = "projects/${local.prod_network_project}/global/networks/${local.prod_network_private}" # in format "projects/{project}/global/networks/{network}"
-  public_network = "projects/${local.prod_network_project}/global/networks/${local.prod_network_public}"
+  network = "https://www.googleapis.com/compute/v1/projects/${local.prod_network_project}/global/networks/${local.prod_vpc}" # in format "projects/{project}/global/networks/{network}"
 }
+
