@@ -1,15 +1,4 @@
-locals {
 
-dev_network_project = "barbados-dev-583929"
-dev_vpc = "development-vpc "
-
-stage_network_project = "barbados-stage-583929"
-stage_vpc = "staging-vpc"
-
-prod_network_project = "barbados-prod-583929"
-prod_vpc = "production-vpc"
-
-}
 
 module "aws_dev" {
   source             = ".//modules/forwarding-config"

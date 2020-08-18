@@ -1,3 +1,18 @@
+locals {
+
+mgmt_network_project = "barbados-mgmt-583929"
+mgmt_vpc = "management-vpc"
+
+dev_network_project = "barbados-dev-583929"
+dev_vpc = "development-vpc"
+
+stage_network_project = "barbados-stage-583929"
+stage_vpc = "staging-vpc"
+
+prod_network_project = "barbados-prod-583929"
+prod_vpc = "production-vpc"
+
+}
 module "dev" {
   source             = ".//modules/default-zones"
 
@@ -55,3 +70,21 @@ module "prod" {
   network = "https://www.googleapis.com/compute/v1/projects/${local.prod_network_project}/global/networks/${local.prod_vpc}" # in format "projects/{project}/global/networks/{network}"
 }
 
+module "mgmt" {
+  source             = ".//modules/default-zones"
+
+  environment = "mgt"
+  project = "${local.mgmt_network_project}" 
+
+  #Zone Names
+  dns_private_zone_name = "gcp-mgt-private" # name of the zone
+  dns_private_zone = "private.mgt.gcp.ofx.com." # zone address in format "foo.bar."
+  dns_private_description = "Management DNS Zone "
+
+  dns_public_zone_name = "gcp-mgt-public" # name of the zone
+  dns_public_zone = "mgt.gcp.ofx.com." # zone address in format "foo.bar."
+  dns_public_description = "Management DNS Zone "
+
+  # networks
+  network = "https://www.googleapis.com/compute/v1/projects/${local.mgmt_network_project}/global/networks/${local.mgmt_vpc}" # in format "projects/{project}/global/networks/{network}"
+}
