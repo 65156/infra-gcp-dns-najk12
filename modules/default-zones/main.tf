@@ -37,3 +37,15 @@ resource "google_dns_managed_zone" "public" {
   }
 
 }
+
+resource "google_dns_policy" "private" {
+  name                      = "private-policy"
+  enable_inbound_forwarding = true
+  enable_logging = true
+  project     = var.project
+  description = "repository:infra-gcp-dns"
+  networks {
+    network_url = var.network
+  }
+  
+}
