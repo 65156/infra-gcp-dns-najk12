@@ -1,7 +1,7 @@
 
 
 module "aws_dev" {
-  source             = ".././/modules/forwarding-config"
+  source             = ".//modules/forwarding-config"
 
   environment = "dev"
   dns_zone_name = "aws-dev-kumo-private" # name of the zone
