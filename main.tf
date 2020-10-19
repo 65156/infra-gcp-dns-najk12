@@ -1,16 +1,21 @@
 locals {
 
+
+
+
+
+
 mgmt_network_project = "barbados-mgmt-583929"
-mgmt_vpc = "management-vpc"
+management_vpc = data.terraform_remote_state.network.outputs.management_vpc_network
 
 dev_network_project = "barbados-dev-583929"
-dev_vpc = "development-vpc"
+dev_vpc = data.terraform_remote_state.network.outputs.development_vpc_network
 
 stage_network_project = "barbados-stage-583929"
-stage_vpc = "staging-vpc"
+stage_vpc = data.terraform_remote_state.network.outputs.staging_vpc_network
 
 prod_network_project = "barbados-prod-583929"
-prod_vpc = "production-vpc"
+prod_vpc = data.terraform_remote_state.network.outputs.production_vpc_network
 
 }
 
@@ -30,7 +35,7 @@ module "dev" {
   dns_public_description = "Development DNS Zone "
 
   # networks
-  network = "https://www.googleapis.com/compute/v1/projects/${local.dev_network_project}/global/networks/${local.dev_vpc}" # in format "projects/{project}/global/networks/{network}"
+  network = local.dev_vpc# in format "projects/{project}/global/networks/{network}"
 }
 
 module "stage" {
@@ -49,7 +54,7 @@ module "stage" {
   dns_public_description = "Staging DNS Zone "
 
   # networks
-  network = "https://www.googleapis.com/compute/v1/projects/${local.stage_network_project}/global/networks/${local.stage_vpc}" # in format "projects/{project}/global/networks/{network}"
+  network = local.stage_vpc# in format "projects/{project}/global/networks/{network}"
 }
 
 module "prod" {
@@ -65,10 +70,10 @@ module "prod" {
 
   dns_public_zone_name = "gcp-prod-public" # name of the zone
   dns_public_zone = "prd.gcp.ofx.com." # zone address in format "foo.bar."
-  dns_public_description = "Production DNS Zone "
+  dns_public_description = "Production DNS Zone"
 
   # networks
-  network = "https://www.googleapis.com/compute/v1/projects/${local.prod_network_project}/global/networks/${local.prod_vpc}" # in format "projects/{project}/global/networks/{network}"
+  network = local.prod_vpc # in format "projects/{project}/global/networks/{network}"
 }
 
 module "mgmt" {
@@ -87,5 +92,5 @@ module "mgmt" {
   dns_public_description = "Management DNS Zone "
 
   # networks
-  network = "https://www.googleapis.com/compute/v1/projects/${local.mgmt_network_project}/global/networks/${local.mgmt_vpc}" # in format "projects/{project}/global/networks/{network}"
+  network = local.management_vpc # in format "projects/{project}/global/networks/{network}"
 }

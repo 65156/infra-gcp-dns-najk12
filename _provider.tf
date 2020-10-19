@@ -12,3 +12,11 @@ terraform {
     prefix = "gcp/dns"
   }
 }
+
+data "terraform_remote_state" "network" {
+  backend = "gcs"
+  config = {
+    bucket = "terraform-statefiles-xjdfh3"
+    prefix = "gcp/network"
+  }
+}
