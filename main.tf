@@ -1,10 +1,4 @@
 locals {
-
-
-
-
-
-
 mgmt_network_project = "barbados-mgmt-583929"
 management_vpc = data.terraform_remote_state.network.outputs.management_vpc_network
 
@@ -16,7 +10,6 @@ stage_vpc = data.terraform_remote_state.network.outputs.staging_vpc_network
 
 prod_network_project = "barbados-prod-583929"
 prod_vpc = data.terraform_remote_state.network.outputs.production_vpc_network
-
 }
 
 module "dev" {

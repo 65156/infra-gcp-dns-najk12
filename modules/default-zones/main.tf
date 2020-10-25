@@ -39,7 +39,10 @@ resource "google_dns_managed_zone" "public" {
 }
 
 resource "google_dns_policy" "private" {
-  # unable to export inbound, forwarder ips, tracking https://github.com/hashicorp/terraform-provider-google/issues/3753
+  # unable to export inbound, forwarder ips, #
+  # tracking 
+  # https://github.com/hashicorp/terraform-provider-google/issues/3753
+  # https://issuetracker.google.com/issues/169585798
   name                      = "private-policy"
   enable_inbound_forwarding = true
   enable_logging = true

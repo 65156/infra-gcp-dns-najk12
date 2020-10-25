@@ -1,0 +1,13 @@
+    
+   GCP.OFX.COM 
+    ns-cloud-b1.googledomains.com.
+    ns-cloud-b2.googledomains.com.
+    ns-cloud-b3.googledomains.com.
+    ns-cloud-b4.googledomains.com. 
+
+
+PRIVATE.ENV.GCP.OFX.COM
+2nd ip address in each subnet / region
+Get with command 
+gcloud compute addresses list --filter="purpose=DNS_RESOLVER"
+--format='csv[no-heading](address, subnetwork)'
