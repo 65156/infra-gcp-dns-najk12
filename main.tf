@@ -26,7 +26,7 @@ module "dev" {
   dns_public_zone_name = "gcp-dev-public"   # name of the zone
   dns_public_zone      = "dev.gcp.ofx.com." # zone address in format "foo.bar."
 
-  # networks
+  # Networks & Peering
   network         = local.management_vpc # in format "projects/{project}/global/networks/{network}"
   peering_network = local.development_vpc
   peering_project = local.dev_network_project
@@ -45,7 +45,7 @@ module "stage" {
   dns_public_zone_name = "gcp-stage-public" # name of the zone
   dns_public_zone      = "stg.gcp.ofx.com." # zone address in format "foo.bar."
 
-  # Networks
+  # Networks & Peering
   network         = local.management_vpc # in format "projects/{project}/global/networks/{network}"
   peering_network = local.staging_vpc
   peering_project = local.stage_network_project
@@ -65,7 +65,7 @@ module "prod" {
   dns_public_zone_name = "gcp-prod-public"  # name of the zone
   dns_public_zone      = "prd.gcp.ofx.com." # zone address in format "foo.bar."
 
-  # Networks
+  # Networks & Peering
   network         = local.management_vpc # in format "projects/{project}/global/networks/{network}"
   peering_network = local.production_vpc
   peering_project = local.prod_network_project
@@ -85,7 +85,7 @@ module "mgmt" {
   dns_public_zone_name = "gcp-mgt-public"   # name of the zone
   dns_public_zone      = "mgt.gcp.ofx.com." # zone address in format "foo.bar."
 
-  # Networks
+  # Networks & Peering
   network = local.management_vpc # in format "projects/{project}/global/networks/{network}"
 }
 
