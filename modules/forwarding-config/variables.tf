@@ -26,3 +26,10 @@ variable "nameserver_03" {
 variable "network" {
   type = string
 }
+variable "peering_network" {
+  type    = string
+  default = null
+}
+variable "peering_project" {
+  type = string
+}
