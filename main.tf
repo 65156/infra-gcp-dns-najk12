@@ -75,7 +75,7 @@ module "mgmt" {
   source          = ".//modules/default-zones"
   environment     = "mgt"
   project         = "${local.mgmt_network_project}"
-  dns_description = "Management DNS Zone"
+  dns_description = "Management"
 
   # Private Zones
   dns_private_zone_name = "gcp-mgt-private"          # name of the zone
