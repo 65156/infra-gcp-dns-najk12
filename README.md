@@ -1,12 +1,6 @@
 # Google Cloud DNS Deployment
 Deploys Core DNS Infrastructure and Configures DNS Zone Exchange with AWS
 
-## GCP Infrastructure
-Multiple VPN Connections across multiple projects 
-+ Cloud Router
-+ HA VPN (2 Tunnels)
-+ Public IP 
-
 ## Topology
 ![Topology](https://raw.githubusercontent.com/frasercarter/infra-gcp-dns-najk12/fraser/DNS.jpg)
 
