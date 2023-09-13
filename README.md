@@ -1,33 +1,45 @@
-![ci](https://github.com/ofx-com/infra-gcp-core/workflows/ci/badge.svg)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=infra-gcp-core&metric=alert_status&token=ecf6fb2772d178d90ff8f9f8b952524062ce8249)](https://sonarcloud.io/dashboard?id=ofx-com_template-sns-publisher)
+# Google Cloud DNS Deployment
+Deploys Core DNS Infrastructure and Configures DNS Zone Exchange with AWS
 
-# Template Repository for Multi Cloud Infrastructure Deployments
-Contains the CICD pipeline and associated logic for terraform multicloud deployments; to setup a pipeline please follow the instructions.
+## GCP Infrastructure
+Multiple VPN Connections across multiple projects 
++ Cloud Router
++ HA VPN (2 Tunnels)
++ Public IP 
 
-# Current Cloud Support
-- [X] AWS
-- [X] GCP
-- [ ] AZURE
+## Topology
+![Topology](https://raw.githubusercontent.com/frasercarter/infra-gcp-dns-najk12/fraser/DNS.jpg)
 
-# Instructions
-1. Create a repository from this template.
-2. Ensure all Pre-Requisites have been met.
+## Variables
 
+  ## DNS Zones
+    # General
+    environment     = Environment Abreviation eg. "Dev"
+    dns_description = Zone Descriotion for Dns Zone
+  
+    # Private Zones
+    dns_private_zone_name = # name of the private zone, eg. "gcp-dev-private"      
+    dns_private_zone      = # zone address in format "foo.bar." eg. "private.dev.gcp.ofx.com." 
+  
+    # Public Zones
+    dns_public_zone_name = # name of the public zone eg. "gcp-dev-public"   
+    dns_public_zone      = # zone address in format "foo.bar. eg. "dev.gcp.ofx.com."
+  
+    # VPC Association
+    network         = local.management_vpc # in format "projects/{project}/global/networks/{network}"
+    peering_network = Reference to existing id from terraform state / Export eg. d"ata.terraform_remote_state.network.outputs.management_vpc_network"
+    peering_project = ""
+  
+  ## Forwarding Zones
+    # Nameservers, Local IPs of Nameservers on destination network (AWS)
+    nameserver_01 = "10.128.2.232"
+    nameserver_02 = "10.128.5.51"
+    nameserver_03 = "10.128.8.30"
 
-# Pre-Requisites
-Create the following Github Secrets:
+  ## Forwarding Zones
+    # VPC Selection
+    network = # Reference to shared VPC that will house the DNZ Forwarders in format "projects/{project}/global/networks/{network}" 
+    peering_network = # reference to the VPC the DNS Peering zones will be associated
+    peering_project = # reference to the project that maintains the above.
 
-AWS_ACCESS_KEY: Access key for a privledged account in AWS (GithubActionDeployUser)<br>
-AWS_SECRET_ACCESS_KEY: Secret key for a privledged account in AWS (GithubActionDeployUser)<br>
-GCP_CREDENTIALS: base64 encoded json keyfile from a privleged account with appropriate IAM roles to the organization, folder or project in Google Cloud.<br>
-- Organization: ofx-infra-org-repo-sa@ofx-infrastructure.iam.gserviceaccount.com 
-- Folder: TBA 
-- Project: TBA 
-
-PACKAGE_TOKEN: github personal access token used to get npm packages<br>
-1. go here https://github.com/settings/tokens.
-2. issue a new personal access token.
-3. grant read:packages.
-4. authorise SSO.
-
-TEAMS_WEBHOOK: web uri from a MS teams webhook, used for creating alerts for Github Requests.
+## References
