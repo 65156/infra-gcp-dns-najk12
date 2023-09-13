@@ -36,7 +36,6 @@ Multiple VPN Connections across multiple projects
     nameserver_02 = "10.128.5.51"
     nameserver_03 = "10.128.8.30"
 
-  ## Forwarding Zones
     # VPC Selection
     network = # Reference to shared VPC that will house the DNZ Forwarders in format "projects/{project}/global/networks/{network}" 
     peering_network = # reference to the VPC the DNS Peering zones will be associated
